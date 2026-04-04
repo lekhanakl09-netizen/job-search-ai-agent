@@ -6,7 +6,7 @@ An AI-powered career assistant built with Python and Streamlit.
 https://lekhana-job-search.streamlit.app
 
 ## 👩‍💻 Built By
-Lekhana K L - Computer Science Student, Bangalore
+Lekhana K L - Information Science Student, PES Engineering College Mandya
 
 ## 🛠️ Features
 - 🔍 Job Search across multiple platforms
