@@ -3,6 +3,10 @@ import pymupdf
  
 st.set_page_config(page_title="Job Search AI Assistant", page_icon="💼", layout="wide")
 st.title("💼 Job Search AI Assistant")
+st.write("👋 Welcome! I am your AI Job Search Assistant!")
+st.write("🎯 I will help you find your dream job!")
+st.write("📌 Choose a tool from the left sidebar to get started!")
+st.write("---")
 st.sidebar.title("Choose a Tool")
  
 tool = st.sidebar.selectbox("Select Tool:",
