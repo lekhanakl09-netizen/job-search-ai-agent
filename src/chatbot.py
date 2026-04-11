@@ -1,3 +1,6 @@
+
+Copy
+
 import streamlit as st
 import pymupdf
 import sqlite3
@@ -17,44 +20,67 @@ c.execute('''CREATE TABLE IF NOT EXISTS saved_jobs
 conn.commit()
  
 ALL_JOBS = [
-    # Bangalore Jobs
+    # Bangalore - Naukri
     {"title": "Python Developer", "company": "Infosys", "salary": "4-6 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
-    {"title": "Software Engineer", "company": "TCS", "salary": "3-5 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java", "python"], "wfh": "No", "notice": "60 days", "city": "Bangalore"},
-    {"title": "Backend Developer", "company": "Wipro", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python", "css"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Backend Developer", "company": "Wipro", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python", "css"], "wfh": "No", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Java Developer", "company": "HCL", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Android Developer", "company": "Swiggy", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["android", "java"], "wfh": "No", "notice": "30 days", "city": "Bangalore"},
+ 
+    # Bangalore - TimesJobs
+    {"title": "Software Engineer", "company": "TCS", "salary": "3-5 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java", "python"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
+    {"title": "DevOps Engineer", "company": "Microsoft", "salary": "10-15 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["devops", "linux"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
+    {"title": "React Developer", "company": "Meesho", "salary": "6-10 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript"], "wfh": "No", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Full Stack Developer", "company": "Ola", "salary": "8-14 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "javascript"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
+ 
+    # Bangalore - LinkedIn
     {"title": "Data Scientist", "company": "Flipkart", "salary": "10-18 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
-    {"title": "DevOps Engineer", "company": "Amazon", "salary": "10-15 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["devops", "linux"], "wfh": "No", "notice": "60 days", "city": "Bangalore"},
-    {"title": "React Developer", "company": "Meesho", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "ML Engineer", "company": "Google", "salary": "15-25 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Bangalore"},
+    {"title": "iOS Developer", "company": "Zomato", "salary": "8-12 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["ios", "swift"], "wfh": "No", "notice": "60 days", "city": "Bangalore"},
  
-    # Mumbai Jobs
+    # Bangalore - Indeed
+    {"title": "DevOps Engineer", "company": "Amazon", "salary": "10-15 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["devops", "linux"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
+    {"title": "React Developer", "company": "Razorpay", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "UI/UX Designer", "company": "Myntra", "salary": "5-9 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "No", "notice": "30 days", "city": "Bangalore"},
+ 
+    # Bangalore - Internshala
+    {"title": "Frontend Intern", "company": "Flipkart", "salary": "15,000/month", "platform": "Internshala", "apply": "https://internshala.com", "skills": ["html", "css"], "wfh": "Yes", "notice": "15 days", "city": "Bangalore"},
+    {"title": "Python Intern", "company": "Startup", "salary": "10,000/month", "platform": "Internshala", "apply": "https://internshala.com", "skills": ["python"], "wfh": "Yes", "notice": "15 days", "city": "Bangalore"},
+ 
+    # Mumbai - All Platforms
     {"title": "Finance Analyst", "company": "HDFC Bank", "salary": "5-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["finance", "excel"], "wfh": "No", "notice": "60 days", "city": "Mumbai"},
-    {"title": "Data Analyst", "company": "Reliance", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python", "sql"], "wfh": "No", "notice": "30 days", "city": "Mumbai"},
-    {"title": "Java Developer", "company": "IBM", "salary": "5-8 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Mumbai"},
-    {"title": "ML Engineer", "company": "Tata", "salary": "12-20 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Mumbai"},
-    {"title": "UI/UX Designer", "company": "Myntra", "salary": "5-9 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "No", "notice": "30 days", "city": "Mumbai"},
     {"title": "Cloud Engineer", "company": "Accenture", "salary": "8-14 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["cloud", "aws"], "wfh": "Yes", "notice": "60 days", "city": "Mumbai"},
+    {"title": "Java Developer", "company": "IBM", "salary": "5-8 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Mumbai"},
+    {"title": "Data Analyst", "company": "Reliance", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python", "sql"], "wfh": "No", "notice": "30 days", "city": "Mumbai"},
+    {"title": "ML Engineer", "company": "Tata", "salary": "12-20 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Mumbai"},
+    {"title": "UI/UX Designer", "company": "Myntra", "salary": "5-9 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "Yes", "notice": "30 days", "city": "Mumbai"},
+    {"title": "Python Developer", "company": "Capgemini", "salary": "4-7 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python"], "wfh": "Yes", "notice": "30 days", "city": "Mumbai"},
  
-    # Delhi Jobs
+    # Delhi - All Platforms
     {"title": "Digital Marketing", "company": "Razorpay", "salary": "4-7 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["marketing", "seo"], "wfh": "Yes", "notice": "30 days", "city": "Delhi"},
     {"title": "Network Engineer", "company": "HCL", "salary": "4-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["networking", "security"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
     {"title": "Full Stack Developer", "company": "Tech Mahindra", "salary": "8-14 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "javascript"], "wfh": "Yes", "notice": "60 days", "city": "Delhi"},
     {"title": "Python Developer", "company": "Wipro", "salary": "4-7 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
     {"title": "Data Analyst", "company": "Microsoft", "salary": "8-12 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "sql"], "wfh": "Yes", "notice": "60 days", "city": "Delhi"},
-    {"title": "Android Developer", "company": "Samsung", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["android", "java"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
+    {"title": "Android Developer", "company": "Samsung", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["android", "java"], "wfh": "Yes", "notice": "30 days", "city": "Delhi"},
+    {"title": "React Developer", "company": "Infosys", "salary": "5-8 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Delhi"},
  
-    # Pune Jobs
+    # Pune - All Platforms
     {"title": "Software Engineer", "company": "Infosys", "salary": "3-6 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java", "python"], "wfh": "Yes", "notice": "30 days", "city": "Pune"},
     {"title": "iOS Developer", "company": "Zomato", "salary": "8-12 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["ios", "swift"], "wfh": "Yes", "notice": "60 days", "city": "Pune"},
     {"title": "DevOps Engineer", "company": "Capgemini", "salary": "8-14 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["devops", "linux"], "wfh": "No", "notice": "60 days", "city": "Pune"},
     {"title": "React Developer", "company": "Cognizant", "salary": "5-9 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Pune"},
-    {"title": "Cloud Engineer", "company": "TCS", "salary": "7-12 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["cloud", "aws"], "wfh": "No", "notice": "60 days", "city": "Pune"},
+    {"title": "Cloud Engineer", "company": "TCS", "salary": "7-12 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["cloud", "aws"], "wfh": "Yes", "notice": "60 days", "city": "Pune"},
+    {"title": "Python Developer", "company": "Wipro", "salary": "4-7 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python"], "wfh": "No", "notice": "30 days", "city": "Pune"},
  
-    # Hyderabad Jobs
+    # Hyderabad - All Platforms
     {"title": "ML Engineer", "company": "Google", "salary": "15-25 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Hyderabad"},
     {"title": "Cybersecurity Analyst", "company": "Deloitte", "salary": "6-12 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["security", "networking"], "wfh": "No", "notice": "30 days", "city": "Hyderabad"},
     {"title": "Java Developer", "company": "Oracle", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Hyderabad"},
     {"title": "Data Scientist", "company": "Amazon", "salary": "12-20 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml", "sql"], "wfh": "Yes", "notice": "60 days", "city": "Hyderabad"},
-    {"title": "Full Stack Developer", "company": "Microsoft", "salary": "10-16 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "javascript"], "wfh": "No", "notice": "60 days", "city": "Hyderabad"},
+    {"title": "Full Stack Developer", "company": "Microsoft", "salary": "10-16 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "javascript"], "wfh": "Yes", "notice": "60 days", "city": "Hyderabad"},
     {"title": "UI/UX Designer", "company": "Apple", "salary": "8-14 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "Yes", "notice": "30 days", "city": "Hyderabad"},
+    {"title": "Python Developer", "company": "TCS", "salary": "4-7 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python"], "wfh": "No", "notice": "30 days", "city": "Hyderabad"},
+    {"title": "React Developer", "company": "Infosys", "salary": "5-9 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Hyderabad"},
 ]
  
 if tool == "Job Search":
@@ -161,7 +187,7 @@ elif tool == "Multiple Job Platforms":
     if st.button("Show Platform Jobs"):
         if role:
             st.success(f"Showing jobs for {role} in {city}")
-            platforms = ["Naukri", "TimesJobs", "LinkedIn", "Indeed"]
+            platforms = ["Naukri", "TimesJobs", "LinkedIn", "Indeed", "Internshala"]
             for platform in platforms:
                 platform_jobs = [j for j in ALL_JOBS if j["platform"] == platform and j["city"] == city]
                 if platform_jobs:
