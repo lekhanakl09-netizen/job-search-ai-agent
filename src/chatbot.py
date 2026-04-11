@@ -5,6 +5,10 @@ from datetime import datetime
  
 st.set_page_config(page_title="Job Search AI Assistant", page_icon="💼", layout="wide")
 st.title("💼 Job Search AI Assistant")
+st.write("👋 Welcome! I am your AI Job Search Assistant!")
+st.write("🎯 I will help you find your dream job!")
+st.write("📌 Choose a tool from the left sidebar to get started!")
+st.write("---")
 st.sidebar.title("Choose a Tool")
  
 tool = st.sidebar.selectbox("Select Tool:",
@@ -133,6 +137,7 @@ elif tool == "Multiple Job Platforms":
     city = st.selectbox("Select City:", ["Bangalore", "Mumbai", "Delhi", "Pune", "Hyderabad"])
  
     if st.button("Show Platform Jobs"):
+<<<<<<< HEAD
         if role:
             st.success(f"Showing jobs for {role} in {city}")
             platforms = ["Naukri", "TimesJobs", "LinkedIn", "Indeed", "Internshala"]
@@ -158,3 +163,17 @@ elif tool == "Saved Jobs":
     else:
         st.warning("No saved jobs yet! Search and save jobs!")
  
+=======
+        if role and city:
+            st.success(f"Showing {len(ALL_JOBS)} jobs for {role} in {city}")
+            for job in ALL_JOBS:
+                with st.container():
+                    st.subheader(f"{job['title']} - {job['company']}")
+                    st.write(f"💰 Salary: {job['salary']}")
+                    st.write(f"🌐 Platform: {job['platform']}")
+                    st.write(f"📍 Location: {city}")
+                    st.markdown(f"[🔗 Apply Here]({job['apply']})")
+                    st.write("---")
+        else:
+            st.warning("Please enter both role and city!")
+>>>>>>> 680be0bd4e69bbece7b5fde25a9a503db3ac7bec
