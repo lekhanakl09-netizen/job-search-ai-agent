@@ -10,7 +10,6 @@ st.sidebar.title("Choose a Tool")
 tool = st.sidebar.selectbox("Select Tool:",
     ["Job Search", "Resume Parser", "Company Research", "Job Matching", "Multiple Job Platforms", "Saved Jobs"])
  
-# Database setup
 conn = sqlite3.connect("jobs.db")
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS saved_jobs
@@ -18,21 +17,44 @@ c.execute('''CREATE TABLE IF NOT EXISTS saved_jobs
 conn.commit()
  
 ALL_JOBS = [
-    {"title": "Python Developer", "company": "Infosys", "salary": "4-6 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python"], "wfh": "Yes", "notice": "30 days"},
-    {"title": "Software Engineer", "company": "TCS", "salary": "3-5 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java", "python"], "wfh": "No", "notice": "60 days"},
-    {"title": "Backend Developer", "company": "Wipro", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python", "css"], "wfh": "Yes", "notice": "30 days"},
-    {"title": "Frontend Intern", "company": "Flipkart", "salary": "15,000/month", "platform": "Internshala", "apply": "https://internshala.com", "skills": ["html", "css"], "wfh": "Yes", "notice": "15 days"},
-    {"title": "Data Analyst", "company": "Amazon", "salary": "6-10 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "sql"], "wfh": "No", "notice": "60 days"},
-    {"title": "ML Engineer", "company": "Google", "salary": "15-25 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days"},
-    {"title": "Java Developer", "company": "IBM", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java"], "wfh": "No", "notice": "30 days"},
-    {"title": "DevOps Engineer", "company": "Microsoft", "salary": "10-15 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["devops", "linux"], "wfh": "Yes", "notice": "60 days"},
-    {"title": "Android Developer", "company": "Swiggy", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["android", "java"], "wfh": "No", "notice": "30 days"},
-    {"title": "iOS Developer", "company": "Zomato", "salary": "8-12 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["ios", "swift"], "wfh": "Yes", "notice": "60 days"},
-    {"title": "UI/UX Designer", "company": "Myntra", "salary": "5-9 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "Yes", "notice": "30 days"},
-    {"title": "Data Scientist", "company": "Paytm", "salary": "10-18 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python", "ml", "sql"], "wfh": "No", "notice": "60 days"},
-    {"title": "React Developer", "company": "Meesho", "salary": "6-10 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript", "html"], "wfh": "Yes", "notice": "30 days"},
-    {"title": "Full Stack Developer", "company": "Ola", "salary": "8-14 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "javascript", "html"], "wfh": "Yes", "notice": "60 days"},
-    {"title": "Network Engineer", "company": "Tech Mahindra", "salary": "4-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["networking", "security"], "wfh": "No", "notice": "30 days"},
+    # Bangalore Jobs
+    {"title": "Python Developer", "company": "Infosys", "salary": "4-6 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Software Engineer", "company": "TCS", "salary": "3-5 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java", "python"], "wfh": "No", "notice": "60 days", "city": "Bangalore"},
+    {"title": "Backend Developer", "company": "Wipro", "salary": "5-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["python", "css"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+    {"title": "Data Scientist", "company": "Flipkart", "salary": "10-18 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "60 days", "city": "Bangalore"},
+    {"title": "DevOps Engineer", "company": "Amazon", "salary": "10-15 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["devops", "linux"], "wfh": "No", "notice": "60 days", "city": "Bangalore"},
+    {"title": "React Developer", "company": "Meesho", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Bangalore"},
+ 
+    # Mumbai Jobs
+    {"title": "Finance Analyst", "company": "HDFC Bank", "salary": "5-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["finance", "excel"], "wfh": "No", "notice": "60 days", "city": "Mumbai"},
+    {"title": "Data Analyst", "company": "Reliance", "salary": "6-10 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python", "sql"], "wfh": "No", "notice": "30 days", "city": "Mumbai"},
+    {"title": "Java Developer", "company": "IBM", "salary": "5-8 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Mumbai"},
+    {"title": "ML Engineer", "company": "Tata", "salary": "12-20 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Mumbai"},
+    {"title": "UI/UX Designer", "company": "Myntra", "salary": "5-9 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "No", "notice": "30 days", "city": "Mumbai"},
+    {"title": "Cloud Engineer", "company": "Accenture", "salary": "8-14 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["cloud", "aws"], "wfh": "Yes", "notice": "60 days", "city": "Mumbai"},
+ 
+    # Delhi Jobs
+    {"title": "Digital Marketing", "company": "Razorpay", "salary": "4-7 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["marketing", "seo"], "wfh": "Yes", "notice": "30 days", "city": "Delhi"},
+    {"title": "Network Engineer", "company": "HCL", "salary": "4-8 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["networking", "security"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
+    {"title": "Full Stack Developer", "company": "Tech Mahindra", "salary": "8-14 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "javascript"], "wfh": "Yes", "notice": "60 days", "city": "Delhi"},
+    {"title": "Python Developer", "company": "Wipro", "salary": "4-7 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["python"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
+    {"title": "Data Analyst", "company": "Microsoft", "salary": "8-12 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "sql"], "wfh": "Yes", "notice": "60 days", "city": "Delhi"},
+    {"title": "Android Developer", "company": "Samsung", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["android", "java"], "wfh": "No", "notice": "30 days", "city": "Delhi"},
+ 
+    # Pune Jobs
+    {"title": "Software Engineer", "company": "Infosys", "salary": "3-6 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java", "python"], "wfh": "Yes", "notice": "30 days", "city": "Pune"},
+    {"title": "iOS Developer", "company": "Zomato", "salary": "8-12 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["ios", "swift"], "wfh": "Yes", "notice": "60 days", "city": "Pune"},
+    {"title": "DevOps Engineer", "company": "Capgemini", "salary": "8-14 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["devops", "linux"], "wfh": "No", "notice": "60 days", "city": "Pune"},
+    {"title": "React Developer", "company": "Cognizant", "salary": "5-9 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["react", "javascript"], "wfh": "Yes", "notice": "30 days", "city": "Pune"},
+    {"title": "Cloud Engineer", "company": "TCS", "salary": "7-12 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["cloud", "aws"], "wfh": "No", "notice": "60 days", "city": "Pune"},
+ 
+    # Hyderabad Jobs
+    {"title": "ML Engineer", "company": "Google", "salary": "15-25 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml"], "wfh": "Yes", "notice": "90 days", "city": "Hyderabad"},
+    {"title": "Cybersecurity Analyst", "company": "Deloitte", "salary": "6-12 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["security", "networking"], "wfh": "No", "notice": "30 days", "city": "Hyderabad"},
+    {"title": "Java Developer", "company": "Oracle", "salary": "6-10 LPA", "platform": "Naukri", "apply": "https://www.naukri.com", "skills": ["java"], "wfh": "Yes", "notice": "30 days", "city": "Hyderabad"},
+    {"title": "Data Scientist", "company": "Amazon", "salary": "12-20 LPA", "platform": "LinkedIn", "apply": "https://www.linkedin.com", "skills": ["python", "ml", "sql"], "wfh": "Yes", "notice": "60 days", "city": "Hyderabad"},
+    {"title": "Full Stack Developer", "company": "Microsoft", "salary": "10-16 LPA", "platform": "TimesJobs", "apply": "https://www.timesjobs.com", "skills": ["python", "javascript"], "wfh": "No", "notice": "60 days", "city": "Hyderabad"},
+    {"title": "UI/UX Designer", "company": "Apple", "salary": "8-14 LPA", "platform": "Indeed", "apply": "https://www.indeed.com", "skills": ["design", "figma"], "wfh": "Yes", "notice": "30 days", "city": "Hyderabad"},
 ]
  
 if tool == "Job Search":
@@ -44,28 +66,31 @@ if tool == "Job Search":
  
     if st.button("Search Jobs"):
         if user_input:
-            filtered = ALL_JOBS
+            filtered = [j for j in ALL_JOBS if j["city"] == location]
             if platform != "All":
                 filtered = [j for j in filtered if j["platform"] == platform]
             if wfh != "Any":
                 filtered = [j for j in filtered if j["wfh"] == wfh]
  
-            st.success(f"Found {len(filtered)} jobs in {location}!")
-            for job in filtered:
-                with st.container():
-                    st.subheader(f"{job['title']} - {job['company']}")
-                    st.write(f"💰 Salary: {job['salary']}")
-                    st.write(f"🌐 Platform: {job['platform']}")
-                    st.write(f"📍 Location: {location}")
-                    st.write(f"🏠 Work From Home: {job['wfh']}")
-                    st.write(f"⏰ Notice Period: {job['notice']}")
-                    st.markdown(f"[🔗 Apply Here]({job['apply']})")
-                    if st.button(f"Save {job['title']}", key=job['title']):
-                        c.execute("INSERT INTO saved_jobs VALUES (NULL,?,?,?,?,?,?)",
-                            (job['title'], job['company'], job['salary'], location, job['platform'], datetime.now().strftime("%Y-%m-%d")))
-                        conn.commit()
-                        st.success("Job Saved!")
-                    st.write("---")
+            if filtered:
+                st.success(f"Found {len(filtered)} jobs in {location}!")
+                for job in filtered:
+                    with st.container():
+                        st.subheader(f"{job['title']} - {job['company']}")
+                        st.write(f"💰 Salary: {job['salary']}")
+                        st.write(f"🌐 Platform: {job['platform']}")
+                        st.write(f"📍 Location: {location}")
+                        st.write(f"🏠 Work From Home: {job['wfh']}")
+                        st.write(f"⏰ Notice Period: {job['notice']}")
+                        st.markdown(f"[🔗 Apply Here]({job['apply']})")
+                        if st.button(f"Save {job['title']}", key=job['title']+location):
+                            c.execute("INSERT INTO saved_jobs VALUES (NULL,?,?,?,?,?,?)",
+                                (job['title'], job['company'], job['salary'], location, job['platform'], datetime.now().strftime("%Y-%m-%d")))
+                            conn.commit()
+                            st.success("Job Saved!")
+                        st.write("---")
+            else:
+                st.warning("No jobs found! Try different filters!")
         else:
             st.warning("Please enter job title!")
  
@@ -110,11 +135,12 @@ elif tool == "Job Matching":
             skill_list = [s.strip().lower() for s in skills.split(",")]
             matched = []
             for job in ALL_JOBS:
-                if any(skill in skill_list for skill in job["skills"]):
-                    if wfh == "Any" or job["wfh"] == wfh:
-                        matched.append(job)
+                if job["city"] == location:
+                    if any(skill in skill_list for skill in job["skills"]):
+                        if wfh == "Any" or job["wfh"] == wfh:
+                            matched.append(job)
             if matched:
-                st.success(f"Found {len(matched)} matching jobs!")
+                st.success(f"Found {len(matched)} matching jobs in {location}!")
                 for job in matched:
                     with st.container():
                         st.subheader(f"{job['title']} - {job['company']}")
@@ -125,7 +151,7 @@ elif tool == "Job Matching":
                         st.markdown(f"[🔗 Apply Here]({job['apply']})")
                         st.write("---")
             else:
-                st.warning("No matching jobs found!")
+                st.warning("No matching jobs found! Try different skills or city!")
  
 elif tool == "Multiple Job Platforms":
     st.header("🌐 Multiple Job Platforms")
@@ -135,15 +161,16 @@ elif tool == "Multiple Job Platforms":
     if st.button("Show Platform Jobs"):
         if role:
             st.success(f"Showing jobs for {role} in {city}")
-            platforms = ["Naukri", "TimesJobs", "LinkedIn", "Indeed", "Internshala"]
+            platforms = ["Naukri", "TimesJobs", "LinkedIn", "Indeed"]
             for platform in platforms:
-                platform_jobs = [j for j in ALL_JOBS if j["platform"] == platform]
-                st.subheader(f"🌐 {platform}")
-                for job in platform_jobs[:2]:
-                    st.write(f"**{job['title']}** - {job['company']}")
-                    st.write(f"💰 {job['salary']} | 📍 {city}")
-                    st.markdown(f"[🔗 Apply]({job['apply']})")
-                st.write("---")
+                platform_jobs = [j for j in ALL_JOBS if j["platform"] == platform and j["city"] == city]
+                if platform_jobs:
+                    st.subheader(f"🌐 {platform}")
+                    for job in platform_jobs:
+                        st.write(f"**{job['title']}** - {job['company']}")
+                        st.write(f"💰 {job['salary']} | 📍 {city} | 🏠 WFH: {job['wfh']}")
+                        st.markdown(f"[🔗 Apply]({job['apply']})")
+                    st.write("---")
  
 elif tool == "Saved Jobs":
     st.header("💾 Saved Jobs")
@@ -157,4 +184,3 @@ elif tool == "Saved Jobs":
             st.write("---")
     else:
         st.warning("No saved jobs yet! Search and save jobs!")
- 
