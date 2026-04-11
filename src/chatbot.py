@@ -1,6 +1,3 @@
-
-Copy
-
 import streamlit as st
 import pymupdf
 import sqlite3
