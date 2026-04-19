@@ -1,20 +1,23 @@
 # 💼 Job Search AI Assistant
 
-An AI-powered career assistant built with Python and Streamlit.
+A production-ready AI-powered career assistant 
+built with Python and Streamlit for Indian Job Market.
 
 ## 🚀 Live Demo
 https://lekhana-job-search.streamlit.app
 
 ## 👩‍💻 Built By
-Lekhana K L - Information Science Student, PES Engineering College Mandya
+Lekhana K L - Information Science Student
+PES Engineering College Mandya
 
 ## 🛠️ Features
-- 🔍 Job Search across multiple platforms
-- 📄 Resume Parser
-- 🏢 Company Research
+- 🔍 Job Search Dashboard with filters
+- 📄 Resume Parser and Analysis
+- 🏢 Company Research and Insights
 - 🎯 Job Matching by Skills
 - 🌐 Multiple Job Platforms
 - 💾 Save Jobs feature
+- 📤 Export Jobs to PDF
 - 🏠 Work From Home filter
 - ⏰ Notice Period filter
 - 📍 Location-based search
@@ -23,8 +26,9 @@ Lekhana K L - Information Science Student, PES Engineering College Mandya
 - Python
 - Streamlit
 - PyMuPDF
-- LangChain
 - SQLite Database
+- ReportLab
+- LangChain
 - GitHub
 
 ## 📍 Job Platforms
@@ -50,3 +54,9 @@ Lekhana K L - Information Science Student, PES Engineering College Mandya
 - Delhi
 - Pune
 - Hyderabad
+
+## ⚙️ Installation
+git clone https://github.com/lekhanakl09-netizen/job-search-ai-agent
+cd job-search-ai-agent
+pip install -r requirements.txt
+streamlit run src/chatbot.py
