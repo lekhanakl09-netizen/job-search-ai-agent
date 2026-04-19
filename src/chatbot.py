@@ -115,7 +115,7 @@ if tool == "Job Search":
                     with col1:
                         st.markdown(f"[🔗 Apply Here]({job['apply']})")
                     with col2:
-                        if st.button(f"💾 Save", key=job['title']+location):
+                        if st.button(f"💾 Save", key=job["title"]+location+job["platform"]):
                             c.execute("INSERT INTO saved_jobs VALUES (NULL,?,?,?,?,?,?)",
                                 (job['title'], job['company'], job['salary'], location, job['platform'], datetime.now().strftime("%Y-%m-%d")))
                             conn.commit()
